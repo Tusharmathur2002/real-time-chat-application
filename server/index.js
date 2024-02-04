@@ -10,6 +10,8 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
+console.log("environment ", process.env.NODE_ENV);
+
 mongoose
   .connect(process.env.MONGO_URL, {
     useNewUrlParser: true,
