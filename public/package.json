@@ -8,6 +8,8 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.25.0",
     "buffer": "^6.0.3",
+    "concurrently": "^8.2.2",
+    "cross-env": "^7.0.3",
     "emoji-picker-react": "^3.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
@@ -24,6 +26,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "serve": "node index.js",
+    "dev": "cross-env NODE_ENV=development concurrently --kill-others-on-fail npm:start",
+    "pro": "cross-env NODE_ENV=production concurrently --kill-others-on-fail npm:start",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

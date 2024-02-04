@@ -10,8 +10,17 @@ require("dotenv").config();
 app.use(cors());
 app.use(express.json());
 
+let MONG_DB_URI = process.env.MONGO_URL;
+let BASE_URL="http://localhost:3000";
+
+
+if(process.env.NODE_ENV === 'production'){
+  MONG_DB_URI = process.env.MONGO_URL_PRODUCTION;
+  BASE_URL = "https://real-time-chat-application-lyart.vercel.app";
+}
+
 mongoose
-  .connect(process.env.MONGO_URL, {
+  .connect(MONG_DB_URI, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
   })
@@ -25,12 +34,13 @@ mongoose
 app.use("/api/auth", authRoutes);
 app.use("/api/messages", messageRoutes);
 
+
 const server = app.listen(process.env.PORT, () =>
   console.log(`Server started on ${process.env.PORT}`)
 );
 const io = socket(server, {
   cors: {
-    origin: "http://localhost:3000",
+    origin: BASE_URL,
     credentials: true,
   },
 });
